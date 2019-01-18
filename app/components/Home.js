@@ -298,6 +298,7 @@ export default class Home extends React.PureComponent {
   nextScenario() {
     let newIdx = this.state.scenariosIdx + 1
     let newScenario = this.state.scenarios[newIdx]
+    
     this.setState({
       scenariosIdx: newIdx,
       scenario: newScenario

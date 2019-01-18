@@ -9,6 +9,8 @@ const isDev = process.env.NODE_ENV !== 'production';
 const ngrok = (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? require('ngrok') : false;
 const resolve = require('path').resolve;
 const app = express();
+// say our sequelize instance is create in 'db.js'
+const {db} = require('./db'); 
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
@@ -27,21 +29,24 @@ const prettyHost = customHost || 'localhost';
 const port = argv.port || process.env.PORT || 3000;
 
 // Start your app.
-app.listen(port, host, (err) => {
-  if (err) {
-    return logger.error(err.message);
-  }
-
-  // Connect to ngrok in dev mode
-  if (ngrok) {
-    ngrok.connect(port, (innerErr, url) => {
-      if (innerErr) {
-        return logger.error(innerErr);
+db.sync()  // sync our database
+  .then(function(){
+    app.listen(port, host, (err) => {
+      if (err) {
+        return logger.error(err.message);
       }
-
-      logger.appStarted(port, prettyHost, url);
+    
+      // Connect to ngrok in dev mode
+      if (ngrok) {
+        ngrok.connect(port, (innerErr, url) => {
+          if (innerErr) {
+            return logger.error(innerErr);
+          }
+    
+          logger.appStarted(port, prettyHost, url);
+        });
+      } else {
+        logger.appStarted(port, prettyHost);
+      }
     });
-  } else {
-    logger.appStarted(port, prettyHost);
-  }
-});
+  })
