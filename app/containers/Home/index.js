@@ -38,7 +38,7 @@ var x = d3.scaleLinear()
 var y = d3.scaleLinear()
 .domain([0,1]).range([0, height]);
 
-var svg = d3.select("#emotion_chart").append("svg")
+var svg = d3.selectAll("#emotion_chart").append("svg")
 .attr("width", width + margin.left + margin.right)
 .attr("height", height + margin.top + margin.bottom)
 
