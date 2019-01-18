@@ -9,16 +9,21 @@ import Helmet from 'react-helmet';
 
 import clm from 'clmtrackr';
 
-import emotionClassifier from '../../../internals/scripts/models/emotionclassifier';
-import emotionModel from '../../../internals/scripts/models/emotionmodel.js';
-import pModel from '../../../internals/scripts/models/pmodel.js';
+import emotionClassifier from '../../internals/scripts/models/emotionclassifier';
+import emotionModel from '../../internals/scripts/models/emotionmodel.js';
+import pModel from '../../internals/scripts/models/pmodel.js';
 import Stats from 'stats-js';
 import * as d3 from "d3";
 
 import './style.css';
 import './styleM.css';
 
-import EmotionResponse from 'containers/EmotionResponse';
+import Game from './Game';
+
+const gottenScenario = {
+  prompt: 'Your coworker tells you her dog is sick.',
+  correctEmotion: 'sad'
+}
 
 var ec = new emotionClassifier();
 ec.init(emotionModel);
@@ -108,7 +113,9 @@ export default class Home extends React.PureComponent {
       trackingStarted:false,
       startValue:"Waiting",
       startDisabled:true,
-      currentEmotion: ''
+      currentEmotion: '',
+      scenario: {},
+      successfulEmotion: ''
     }
   }
 
@@ -124,6 +131,7 @@ export default class Home extends React.PureComponent {
     let overlayCC = overlay.getContext('2d');
 
     this.setState({
+      scenario: gottenScenario,
       vid:vid
     }, () => {
       this.setState({
@@ -228,6 +236,11 @@ export default class Home extends React.PureComponent {
           this.setState({
             currentEmotion: emotion
           })
+          if(this.state.currentEmotion === this.state.scenario.correctEmotion) {
+            this.setState({
+              successfulEmotion: this.state.currentEmotion
+            })
+          }
           // console.log('Current Emotion: ', emotion)
           document.getElementById(`icon-${er[i].emotion}`).style.visibility = 'visible';
         } else {
@@ -275,7 +288,8 @@ export default class Home extends React.PureComponent {
             <img className="emotion_icon" id="icon-happy" src="https://www.auduno.com/clmtrackr/examples/media/icon_happy.png"/>
           </div>
           <div id='emotion_chart'></div>
-          <EmotionResponse currentEmotion={this.state.currentEmotion} />
+          <Game currentEmotion={this.state.currentEmotion} scenario={this.state.scenario} successfulEmotion={this.state.successfulEmotion}/>
+          
         </div>
       </div>
       

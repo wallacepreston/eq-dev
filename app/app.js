@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import '!file-loader?name=[name].[ext]!./favicon.ico';
 import '!file-loader?name=[name].[ext]!./manifest.json';
 
-import App from 'containers/App';
+import App from './components/App';
 
 ReactDOM.render((
   <BrowserRouter>
