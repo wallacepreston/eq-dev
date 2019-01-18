@@ -1,10 +1,10 @@
 {
-  "name": "react-boilerplate",
+  "name": "dev-eq",
   "version": "3.0.0",
   "description": "A highly scalable React Boilerplate.",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Technopathic/react-boilerplate.git"
+    "url": "git://github.com/wallacepreston/eq-dev.git"
   },
   "engines": {
     "npm": ">=3",
