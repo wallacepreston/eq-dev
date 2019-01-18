@@ -154,7 +154,6 @@
     "null-loader": "0.1.1",
     "offline-plugin": "4.9.0",
     "plop": "1.9.1",
-    "pre-commit": "1.2.2",
     "react-icons": "^2.2.7",
     "rimraf": "2.6.2",
     "shelljs": "0.8.1",
