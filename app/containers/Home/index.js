@@ -18,6 +18,8 @@ import * as d3 from "d3";
 import './style.css';
 import './styleM.css';
 
+import EmotionResponse from 'containers/EmotionResponse';
+
 var ec = new emotionClassifier();
 ec.init(emotionModel);
 var emotionData = ec.getBlank();
@@ -90,6 +92,9 @@ document.addEventListener('clmtrackrIteration', function(event) {
 stats.update();
 }, false);
 
+let er
+let emotion
+
 export default class Home extends React.PureComponent {
 
   constructor() {
@@ -102,7 +107,8 @@ export default class Home extends React.PureComponent {
       overlayCC:"",
       trackingStarted:false,
       startValue:"Waiting",
-      startDisabled:true
+      startDisabled:true,
+      currentEmotion: ''
     }
   }
 
@@ -213,14 +219,19 @@ export default class Home extends React.PureComponent {
       this.ctrack.draw(this.state.overlay);
     }
     let cp = this.ctrack.getCurrentParameters();
-    var er = ec.meanPredict(cp);
+    er = ec.meanPredict(cp);
     if (er) {
       this.updateData(er);
       for (var i = 0;i < er.length;i++) {
         if (er[i].value > 0.4) {
-          document.getElementById('icon'+(i+1)).style.visibility = 'visible';
+          emotion = er[i].emotion
+          this.setState({
+            currentEmotion: emotion
+          })
+          // console.log('Current Emotion: ', emotion)
+          document.getElementById(`icon-${er[i].emotion}`).style.visibility = 'visible';
         } else {
-          document.getElementById('icon'+(i+1)).style.visibility = 'hidden';
+          document.getElementById(`icon-${er[i].emotion}`).style.visibility = 'hidden';
         }
       }
     }
@@ -258,12 +269,13 @@ export default class Home extends React.PureComponent {
 			  </div>
         <div id="emotion_container">
           <div id="emotion_icons">
-            <img className="emotion_icon" id="icon1" src="https://www.auduno.com/clmtrackr/examples/media/icon_angry.png" />
-            <img className="emotion_icon" id="icon2" src="https://www.auduno.com/clmtrackr/examples/media/icon_sad.png"/>
-            <img className="emotion_icon" id="icon3" src="https://www.auduno.com/clmtrackr/examples/media/icon_surprised.png"/>
-            <img className="emotion_icon" id="icon4" src="https://www.auduno.com/clmtrackr/examples/media/icon_happy.png"/>
+            <img className="emotion_icon" id="icon-angry" src="https://www.auduno.com/clmtrackr/examples/media/icon_angry.png" />
+            <img className="emotion_icon" id="icon-sad" src="https://www.auduno.com/clmtrackr/examples/media/icon_sad.png"/>
+            <img className="emotion_icon" id="icon-surprised" src="https://www.auduno.com/clmtrackr/examples/media/icon_surprised.png"/>
+            <img className="emotion_icon" id="icon-happy" src="https://www.auduno.com/clmtrackr/examples/media/icon_happy.png"/>
           </div>
           <div id='emotion_chart'></div>
+          <EmotionResponse currentEmotion={this.state.currentEmotion} />
         </div>
       </div>
       
