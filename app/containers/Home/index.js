@@ -9,8 +9,86 @@ import Helmet from 'react-helmet';
 
 import clm from 'clmtrackr';
 
+import emotionClassifier from '../../../internals/scripts/models/emotionclassifier';
+import emotionModel from '../../../internals/scripts/models/emotionmodel.js';
+import pModel from '../../../internals/scripts/models/pmodel.js';
+import Stats from 'stats-js';
+import * as d3 from "d3";
+
 import './style.css';
 import './styleM.css';
+
+var ec = new emotionClassifier();
+ec.init(emotionModel);
+var emotionData = ec.getBlank();
+
+/************ d3 code for barchart *****************/
+
+var margin = {top : 20, right : 20, bottom : 10, left : 40},
+width = 400 - margin.left - margin.right,
+height = 100 - margin.top - margin.bottom;
+
+var barWidth = 30;
+
+var formatPercent = d3.format(".0%");
+
+var x = d3.scaleLinear()
+.domain([0, ec.getEmotions().length]).range([margin.left, width+margin.left]);
+
+var y = d3.scaleLinear()
+.domain([0,1]).range([0, height]);
+
+var svg = d3.select("#emotion_chart").append("svg")
+.attr("width", width + margin.left + margin.right)
+.attr("height", height + margin.top + margin.bottom)
+
+svg.selectAll("rect").
+data(emotionData).
+enter().
+append("svg:rect").
+attr("x", function(datum, index) { return x(index); }).
+attr("y", function(datum) { return height - y(datum.value); }).
+attr("height", function(datum) { return y(datum.value); }).
+attr("width", barWidth).
+attr("fill", "#2d578b");
+
+svg.selectAll("text.labels").
+data(emotionData).
+enter().
+append("svg:text").
+attr("x", function(datum, index) { return x(index) + barWidth; }).
+attr("y", function(datum) { return height - y(datum.value); }).
+attr("dx", -barWidth/2).
+attr("dy", "1.2em").
+attr("text-anchor", "middle").
+text(function(datum) { return datum.value;}).
+attr("fill", "white").
+attr("class", "labels");
+
+svg.selectAll("text.yAxis").
+data(emotionData).
+enter().append("svg:text").
+attr("x", function(datum, index) { return x(index) + barWidth; }).
+attr("y", height).
+attr("dx", -barWidth/2).
+attr("text-anchor", "middle").
+attr("style", "font-size: 12").
+text(function(datum) { return datum.emotion;}).
+attr("transform", "translate(0, 18)").
+attr("class", "yAxis");
+
+
+/******** stats ********/
+
+const stats = new Stats();
+stats.domElement.style.position = 'absolute';
+stats.domElement.style.top = '0px';
+document.body.appendChild( stats.dom );
+
+// update stats on every iteration
+document.addEventListener('clmtrackrIteration', function(event) {
+stats.update();
+}, false);
 
 export default class Home extends React.PureComponent {
 
@@ -29,6 +107,7 @@ export default class Home extends React.PureComponent {
   }
 
   componentWillMount() {
+    
     this.ctrack = new clm.tracker();
     this.ctrack.init();
   }
@@ -128,12 +207,43 @@ export default class Home extends React.PureComponent {
   }
 
   drawLoop = () => {
-    requestAnimFrame(this.drawLoop);
+    requestAnimationFrame(this.drawLoop);
     this.state.overlayCC.clearRect(0, 0, this.state.vidWidth, this.state.vidHeight);
     if (this.ctrack.getCurrentPosition()) {
       this.ctrack.draw(this.state.overlay);
     }
     let cp = this.ctrack.getCurrentParameters();
+    var er = ec.meanPredict(cp);
+    if (er) {
+      this.updateData(er);
+      for (var i = 0;i < er.length;i++) {
+        if (er[i].value > 0.4) {
+          document.getElementById('icon'+(i+1)).style.visibility = 'visible';
+        } else {
+          document.getElementById('icon'+(i+1)).style.visibility = 'hidden';
+        }
+      }
+    }
+  }
+
+  updateData(data) {
+    // update
+    var rects = svg.selectAll("rect")
+      .data(data)
+      .attr("y", function(datum) { return height - y(datum.value); })
+      .attr("height", function(datum) { return y(datum.value); });
+    var texts = svg.selectAll("text.labels")
+      .data(data)
+      .attr("y", function(datum) { return height - y(datum.value); })
+      .text(function(datum) { return datum.value.toFixed(1);});
+
+    // enter
+    rects.enter().append("svg:rect");
+    texts.enter().append("svg:text");
+
+    // exit
+    rects.exit().remove();
+    texts.exit().remove();
   }
 
   render() {
@@ -145,8 +255,18 @@ export default class Home extends React.PureComponent {
           <canvas id="overlay" width="400" height="300"></canvas>
           
           <input className="btn" type="button" value={this.state.startValue} disabled={this.state.startDisabled} onClick={this.startVideo} id="startbutton"></input>
-			</div>
+			  </div>
+        <div id="emotion_container">
+          <div id="emotion_icons">
+            <img className="emotion_icon" id="icon1" src="https://www.auduno.com/clmtrackr/examples/media/icon_angry.png" />
+            <img className="emotion_icon" id="icon2" src="https://www.auduno.com/clmtrackr/examples/media/icon_sad.png"/>
+            <img className="emotion_icon" id="icon3" src="https://www.auduno.com/clmtrackr/examples/media/icon_surprised.png"/>
+            <img className="emotion_icon" id="icon4" src="https://www.auduno.com/clmtrackr/examples/media/icon_happy.png"/>
+          </div>
+          <div id='emotion_chart'></div>
+        </div>
       </div>
+      
     );
   }
 }
