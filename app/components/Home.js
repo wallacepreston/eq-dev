@@ -20,10 +20,31 @@ import './styleM.css';
 
 import Game from './Game';
 
+// dummy data for the game
+const dummyScenarios = [
+  {
+    prompt: 'Your coworker tells you her dog is sick.',
+    correctEmotion: 'sad'
+  },
+  {
+    prompt: 'Your boss says he is going to the mountains to ski next weekend. He shows you his brand-new powder skis',
+    correctEmotion: 'surprised'
+  },
+  {
+    prompt: 'Your coworker just got a promotion, even though you did not.',
+    correctEmotion: 'happy'
+  },
+  {
+    prompt: 'Your friend just got stung by a bee. She is crying.',
+    correctEmotion: 'sad'
+  }
+]
 const gottenScenario = {
   prompt: 'Your coworker tells you her dog is sick.',
   correctEmotion: 'sad'
 }
+
+
 
 var ec = new emotionClassifier();
 ec.init(emotionModel);
@@ -114,9 +135,12 @@ export default class Home extends React.PureComponent {
       startValue:"Waiting",
       startDisabled:true,
       currentEmotion: '',
+      scenarios: [],
+      scenariosIdx: 0,
       scenario: {},
       successfulEmotion: ''
     }
+    this.nextScenario = this.nextScenario.bind(this)
   }
 
   componentWillMount() {
@@ -131,7 +155,8 @@ export default class Home extends React.PureComponent {
     let overlayCC = overlay.getContext('2d');
 
     this.setState({
-      scenario: gottenScenario,
+      scenarios: dummyScenarios,
+      scenario: dummyScenarios[0],
       vid:vid
     }, () => {
       this.setState({
@@ -270,6 +295,15 @@ export default class Home extends React.PureComponent {
     texts.exit().remove();
   }
 
+  nextScenario() {
+    let newIdx = this.state.scenariosIdx + 1
+    let newScenario = this.state.scenarios[newIdx]
+    this.setState({
+      scenariosIdx: newIdx,
+      scenario: newScenario
+    })
+  }
+
   render() {
     return (
       <div className="container">
@@ -288,7 +322,7 @@ export default class Home extends React.PureComponent {
             <img className="emotion_icon" id="icon-happy" src="https://www.auduno.com/clmtrackr/examples/media/icon_happy.png"/>
           </div>
           <div id='emotion_chart'></div>
-          <Game currentEmotion={this.state.currentEmotion} scenario={this.state.scenario} successfulEmotion={this.state.successfulEmotion}/>
+          <Game currentEmotion={this.state.currentEmotion} scenario={this.state.scenario} successfulEmotion={this.state.successfulEmotion} nextScenario={this.nextScenario}/>
           
         </div>
       </div>
