@@ -85,7 +85,9 @@
       "sequelize",
       "webpack",
       "html-webpack-plugin",
-      "image-webpack-loader"
+      "image-webpack-loader",
+      "webpack-dev-middleware",
+      "webpack-hot-middleware"
     ],
     "include": [
       "core-js",
@@ -142,7 +144,9 @@
     "webpack": "3.10.0",
     "html-webpack-plugin": "2.30.1",
     "image-webpack-loader": "^4.6.0",
-    "whatwg-fetch": "2.0.3"
+    "whatwg-fetch": "2.0.3",
+    "webpack-dev-middleware": "2.0.4",
+    "webpack-hot-middleware": "2.21.0"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
@@ -179,8 +183,6 @@
     "shelljs": "0.8.1",
     "sinon": "4.2.2",
     "style-loader": "0.20.1",
-    "url-loader": "0.6.2",
-    "webpack-dev-middleware": "2.0.4",
-    "webpack-hot-middleware": "2.21.0"
+    "url-loader": "0.6.2"
   }
 }
