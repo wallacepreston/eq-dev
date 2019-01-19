@@ -37,11 +37,11 @@ const Scenario = db.define('scenario', {
   },
   audioSuccessURL: {
     type: Sequelize.STRING,
-    defaultValue: 'http://www.pacdv.com/sounds/people_sound_effects/yes_1.wav'
+    defaultValue: 'http://feeds.soundcloud.com/stream/561263544-user-235075197-correct-great-job-1.mp3'
   },
   audioFailureURL: {
     type: Sequelize.STRING,
-    defaultValue: 'http://www.pacdv.com/sounds/people_sound_effects/hmmmm.wav'
+    defaultValue: 'http://feeds.soundcloud.com/stream/561267666-user-235075197-incorrect-oh-interesting.mp3'
   }
   
 })

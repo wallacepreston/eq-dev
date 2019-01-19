@@ -16,7 +16,7 @@ const Game = (props) => {
       <div>
         <Prompt prompt={scenario.prompt}/>
         <EmotionResponse currentEmotion={currentEmotion}/>
-        <Result correctEmotion={scenario.correctEmotion} successfulEmotion={successfulEmotion} updateScore={updateScore} score={score}/>
+        <Result scenario={scenario} successfulEmotion={successfulEmotion} updateScore={updateScore} score={score}/>
         <button type="button" onClick={nextScenario} >Next Scenario</button>
       </div>
     );
