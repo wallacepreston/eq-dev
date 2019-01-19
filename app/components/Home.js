@@ -14,7 +14,7 @@ export default class Home extends React.PureComponent { // eslint-disable-line r
           <em>Helping Developers Emote</em>
         </h3>
         <div className="btn-container">
-        <Link to="/learn"><button type="button" class="btn btn-primary btn-lg btn-xl center-block">Learn Now!</button></Link>
+        <Link to="/learn"><button type="button" className="btn btn-primary btn-lg btn-xl center-block">Learn Now!</button></Link>
         </div>
       </div>
       <div className="overlay"></div>

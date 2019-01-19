@@ -6,14 +6,36 @@
   },
   {
     "prompt": "Your boss says he is going to the mountains to ski next weekend. He shows you his brand-new powder skis",
-    "correctEmotion": "surprised"
+    "correctEmotion": "surprised",
+    "audioSuccessURL": "http://feeds.soundcloud.com/stream/561267705-user-235075197-correct-that-is-what-i-was.mp3",
+    "imageSuccessURL": "/omri/correct-smile.jpg"
+    
   },
   {
     "prompt": "Your coworker just got a promotion, even though you did not.",
-    "correctEmotion": "happy"
+    "correctEmotion": "happy",
+    "audioSuccessURL": "http://feeds.soundcloud.com/stream/561267702-user-235075197-correct-yes.mp3",
+    "imageSuccessURL": "/omri/hello-arms-out.jpg"
   },
   {
     "prompt": "Your friend just got stung by a bee. She is crying.",
-    "correctEmotion": "sad"
+    "correctEmotion": "sad",
+    "imageSuccessURL": "/omri/correct-smile.jpg"
+  },
+  {
+    "prompt": "Your direct report asks you to add a new feature to the application.",
+    "correctEmotion": "happy",
+    "audioSuccessURL": "http://feeds.soundcloud.com/stream/561267705-user-235075197-correct-that-is-what-i-was.mp3",
+    "imageSuccessURL": "/omri/incorrect-confused.jpg"
+  },
+  {
+    "prompt": "Your coworker's car hads a blown head gasket (what is a head gasket anyway?).",
+    "correctEmotion": "sad",
+    "imageSuccessURL": "/omri/correct-smile.jpg"
+  },
+  {
+    "prompt": "Your friend tells you about her cat had a litter of kittens.",
+    "correctEmotion": "surprised",
+    "audioSuccessURL": "http://feeds.soundcloud.com/stream/561267702-user-235075197-correct-yes.mp3"
   }
 ]
