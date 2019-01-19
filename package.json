@@ -124,7 +124,8 @@
       "shelljs",
       "sinon",
       "style-loader",
-      "url-loader"
+      "url-loader",
+      "clmtrackr"
     ],
     "include": [
       "core-js",
