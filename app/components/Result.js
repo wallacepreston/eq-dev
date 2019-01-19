@@ -5,7 +5,6 @@ const Result = (props) => {
     return (
       <div>
         <h4>Result</h4>
-        {/* <img src={require('./media/icon_happy.png')} /> */}
         
         <h2>
           {scenario.correctEmotion === successfulEmotion

@@ -1,6 +1,7 @@
 /* eslint consistent-return:0 */
 
 const express = require('express');
+const path = require('path')
 const logger = require('./logger');
 
 const argv = require('minimist')(process.argv.slice(2));
@@ -16,11 +17,14 @@ const {db} = require('./db');
 // app.use('/api', myApi);
 app.use('/api', require('./api')) 
 
+app.use(express.static(path.join(__dirname, '../public')))
+
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
   outputPath: resolve(process.cwd(), 'build'),
   publicPath: '/',
 });
+
 
 // get the intended host and port number, use localhost and port 3000 if not provided
 const customHost = argv.host || process.env.HOST;

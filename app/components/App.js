@@ -7,7 +7,7 @@
 import React, {Component} from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Home from './Home';
+import Learn from './Learn';
 import NotFound from './NotFound';
 
 import './style.css';
@@ -17,7 +17,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Switch>
-        <Route exact path='/' render={() => <Home/>}/>
+        <Route path='/learn' render={() => <Learn/>}/>
         <Route path='*' render={() => <NotFound/>}/>
       </Switch>
     );
