@@ -12,14 +12,20 @@ import NotFound from './NotFound';
 
 import './style.css';
 import './styleM.css';
+import NavBar from './NavBar';
+import Home from './Home';
 
 export default class App extends React.Component {
   render() {
     return (
-      <Switch>
-        <Route path='/learn' render={() => <Learn/>}/>
-        <Route path='*' render={() => <NotFound/>}/>
-      </Switch>
+      <div>
+        <NavBar />
+        <Switch>
+          <Route path='/learn' render={() => <Learn/>}/>
+          <Route exact path='/' render={() => <Home/>}/>
+          <Route path='*' render={() => <NotFound/>}/>
+        </Switch>
+      </div>
     );
   }
 }

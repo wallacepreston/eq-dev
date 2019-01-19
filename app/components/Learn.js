@@ -123,7 +123,7 @@ stats.update();
 let er
 let emotion
 
-class Home extends React.PureComponent {
+class Learn extends React.PureComponent {
 
   constructor() {
     super();
@@ -439,4 +439,4 @@ window.cancelRequestAnimFrame = (function() {
          window.clearTimeout;
 })();
 
-export default Home
+export default Learn
