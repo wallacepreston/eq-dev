@@ -144,9 +144,14 @@ class Home extends React.PureComponent {
       scenarios: [],
       scenariosIdx: 0,
       scenario: {},
-      successfulEmotion: ''
+      successfulEmotion: '',
+      score: {
+        correct: 0,
+        incorrect: 0
+      }
     }
     this.nextScenario = this.nextScenario.bind(this)
+    this.updateScore = this.updateScore.bind(this)
   }
 
   componentWillMount() {
@@ -315,6 +320,26 @@ class Home extends React.PureComponent {
     })
   }
 
+  updateScore(result){
+    const newSingleScore = this.state.score[result] + 1
+    if(result === 'correct'){
+      this.setState({
+        score:{
+          ...this.state.score,
+          correct: newSingleScore
+        }
+      })
+    }
+    else {
+      this.setState({
+        score:{
+          ...this.state.score,
+          incorrect: newSingleScore
+        }
+      })
+    }
+  }
+
   render() {
     return (
       <div className="container">
@@ -336,8 +361,10 @@ class Home extends React.PureComponent {
           {this.state.scenariosIdx < this.state.scenarios.length
           ?
           (
-
-            <Game currentEmotion={this.state.currentEmotion} scenario={this.state.scenario} successfulEmotion={this.state.successfulEmotion} nextScenario={this.nextScenario}/>
+            <div>
+              <Game currentEmotion={this.state.currentEmotion} scenario={this.state.scenario} successfulEmotion={this.state.successfulEmotion} nextScenario={this.nextScenario} updateScore={this.updateScore} score={this.state.score}/>
+              <p>Your Score: {this.state.score.correct}</p>
+            </div>
           )
           :
           <Finished />

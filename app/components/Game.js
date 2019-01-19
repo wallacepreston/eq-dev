@@ -11,12 +11,12 @@ import Prompt from './Prompt';
 import Result from './Result'
 
 const Game = (props) => {
-  const {currentEmotion, scenario, successfulEmotion, nextScenario} = props
+  const {currentEmotion, scenario, successfulEmotion, nextScenario, updateScore, score} = props
     return (
       <div>
         <Prompt prompt={scenario.prompt}/>
         <EmotionResponse currentEmotion={currentEmotion}/>
-        <Result correctEmotion={scenario.correctEmotion} successfulEmotion={successfulEmotion}/>
+        <Result correctEmotion={scenario.correctEmotion} successfulEmotion={successfulEmotion} updateScore={updateScore} score={score}/>
         <button type="button" onClick={nextScenario} >Next Scenario</button>
       </div>
     );
