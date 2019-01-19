@@ -12,14 +12,6 @@ const Result = (props) => {
           (
           <div>
             {updateScore('correct')}
-            <audio
-              
-              src={scenario.audioSuccessURL} 
-              autoPlay
-            />
-
-                
-              Correct! You should be <u>{successfulEmotion}</u> in this case!
           </div>
           )
           :

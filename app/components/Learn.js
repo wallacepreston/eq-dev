@@ -340,12 +340,34 @@ class Home extends React.PureComponent {
     return (
       <div className="container">
         <Helmet title="Home" meta={[ { name: 'description', content: 'Description of Home' }]}/>
-
+        <audio
+          src="http://feeds.soundcloud.com/stream/561267645-user-235075197-today-were-going-to-learn.mp3" 
+          autoPlay
+        />
         <div className="row">
           <div className="col">
             <h1>Omri</h1>
             <div id="Omri" width="400" height="300" preload="auto" loop playsInline autoPlay>
-              <img src={require('./media/omri/hello-wave.jpg')} />
+              {this.state.scenario.correctEmotion === this.state.successfulEmotion
+              ?
+              (
+                <div>
+                  <img src={this.state.scenario.imageSuccessURL} />
+                  <audio
+                    src={this.state.scenario.audioSuccessURL} 
+                    autoPlay
+                  />
+                    <h4>Correct!</h4> 
+                    <h2>You should be <u>{this.state.successfulEmotion}</u> in this case!</h2>
+                </div>
+              )
+              :
+                <div>
+                  <img src="/omri/hello-wave.jpg" />
+                  <h4>Hi! I'm Omri. </h4> 
+                  <h2>Today, we're going to learn about emotions.</h2>
+                </div>
+              }
 
             </div>
           </div>

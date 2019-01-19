@@ -29,11 +29,11 @@ const Scenario = db.define('scenario', {
   },
   imageSuccessURL: {
     type: Sequelize.STRING,
-    defaultValue: 'https://no-smoke.org/wp-content/uploads/2018/03/ThumbUpGuy-500x383.jpg'
+    defaultValue: '/omri/correct-thumbs-up.jpg'
   },
   imageFailureURL: {
     type: Sequelize.STRING,
-    defaultValue: 'https://i.dietdoctor.com/wp-content/uploads/2013/01/confused.bmp?auto=compress%2Cformat&w=600&h=398&fit=crop'
+    defaultValue: '/omri/incorrect-confused.jpg'
   },
   audioSuccessURL: {
     type: Sequelize.STRING,
