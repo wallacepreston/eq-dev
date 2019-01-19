@@ -3,15 +3,20 @@
  * Home
  *
  */
-
+import 'babel-polyfill'
 import React from 'react';
 import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import axios from 'axios';
 
 import clm from 'clmtrackr';
 
 import emotionClassifier from '../../internals/scripts/models/emotionclassifier';
 import emotionModel from '../../internals/scripts/models/emotionmodel.js';
 import pModel from '../../internals/scripts/models/pmodel.js';
+import {fetchScenarios, fetchScenario} from '../reducers'
+
 import Stats from 'stats-js';
 import * as d3 from "d3";
 
@@ -19,6 +24,7 @@ import './style.css';
 import './styleM.css';
 
 import Game from './Game';
+import Finished from './Finished';
 
 // dummy data for the game
 const dummyScenarios = [
@@ -121,7 +127,7 @@ stats.update();
 let er
 let emotion
 
-export default class Home extends React.PureComponent {
+class Home extends React.PureComponent {
 
   constructor() {
     super();
@@ -149,13 +155,13 @@ export default class Home extends React.PureComponent {
     this.ctrack.init();
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     let vid = document.getElementById('videoel');
     let overlay = document.getElementById('overlay');
     let overlayCC = overlay.getContext('2d');
-
+    const {data} = await axios.get('/api/scenarios');
     this.setState({
-      scenarios: dummyScenarios,
+      scenarios: data,
       scenario: dummyScenarios[0],
       vid:vid
     }, () => {
@@ -165,6 +171,10 @@ export default class Home extends React.PureComponent {
         overlay:overlay,
         overlayCC:overlayCC
       })
+    })
+    const scenariosList = this.state.scenarios
+    this.setState({
+      scenario: scenariosList[0],
     })
 
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
@@ -323,7 +333,15 @@ export default class Home extends React.PureComponent {
             <img className="emotion_icon" id="icon-happy" src="https://www.auduno.com/clmtrackr/examples/media/icon_happy.png"/>
           </div>
           <div id='emotion_chart'></div>
-          <Game currentEmotion={this.state.currentEmotion} scenario={this.state.scenario} successfulEmotion={this.state.successfulEmotion} nextScenario={this.nextScenario}/>
+          {this.state.scenariosIdx < this.state.scenarios.length
+          ?
+          (
+
+            <Game currentEmotion={this.state.currentEmotion} scenario={this.state.scenario} successfulEmotion={this.state.successfulEmotion} nextScenario={this.nextScenario}/>
+          )
+          :
+          <Finished />
+          }
           
         </div>
       </div>
@@ -359,3 +377,5 @@ window.cancelRequestAnimFrame = (function() {
          window.msCancelRequestAnimationFrame ||
          window.clearTimeout;
 })();
+
+export default Home

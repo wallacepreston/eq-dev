@@ -1,0 +1,19 @@
+
+[
+  {
+    "prompt": "Your coworker tells you her dog is sick.",
+    "correctEmotion": "sad"
+  },
+  {
+    "prompt": "Your boss says he is going to the mountains to ski next weekend. He shows you his brand-new powder skis",
+    "correctEmotion": "surprised"
+  },
+  {
+    "prompt": "Your coworker just got a promotion, even though you did not.",
+    "correctEmotion": "happy"
+  },
+  {
+    "prompt": "Your friend just got stung by a bee. She is crying.",
+    "correctEmotion": "sad"
+  }
+]

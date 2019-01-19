@@ -15,13 +15,22 @@ export const getScenario = (scenario) => {
   return { type: GET_SCENARIO, scenario };
 }
 
-
+export const getCurrent = (scenario) => {
+  return { type: GET_SCENARIO, scenario };
+}
 
 // THUNK CREATORS
 
 export const fetchScenarios = () => {
   return async (dispatch) => {
     const {data} = await axios.get('/api/scenarios');
+    dispatch(getScenario(data));
+  }
+}
+
+export const fetchScenario = (scenarioId) => {
+  return async (dispatch) => {
+    const {data} = await axios.get(`/api/scenario/${scenarioId}`);
     dispatch(getScenario(data));
   }
 }
@@ -48,7 +57,7 @@ const reducer = (state = initialState, action) => {
     case GET_SCENARIO:
     return {
       ...state,
-      selected: action.scenario
+      scenario: action.scenario
     }
     default:
       return state
