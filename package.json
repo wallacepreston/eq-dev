@@ -87,7 +87,42 @@
       "html-webpack-plugin",
       "image-webpack-loader",
       "webpack-dev-middleware",
-      "webpack-hot-middleware"
+      "webpack-hot-middleware",
+      "babel-cli",
+      "babel-core",
+      "babel-loader",
+      "babel-plugin-dynamic-import-node",
+      "babel-plugin-react-transform",
+      "babel-plugin-transform-es2015-modules-commonjs",
+      "babel-plugin-transform-react-constant-elements",
+      "babel-plugin-transform-react-inline-elements",
+      "babel-plugin-transform-react-remove-prop-types",
+      "babel-preset-env",
+      "babel-preset-react",
+      "babel-preset-react-hmre",
+      "babel-preset-stage-0",
+      "cheerio",
+      "circular-dependency-plugin",
+      "coveralls",
+      "css-loader",
+      "enzyme",
+      "eventsource-polyfill",
+      "exports-loader",
+      "file-loader",
+      "html-loader",
+      "imports-loader",
+      "jest-cli",
+      "ngrok",
+      "node-plop",
+      "null-loader",
+      "offline-plugin",
+      "plop",
+      "react-icons",
+      "rimraf",
+      "shelljs",
+      "sinon",
+      "style-loader",
+      "url-loader"
     ],
     "include": [
       "core-js",
@@ -146,9 +181,7 @@
     "image-webpack-loader": "^4.6.0",
     "whatwg-fetch": "2.0.3",
     "webpack-dev-middleware": "2.0.4",
-    "webpack-hot-middleware": "2.21.0"
-  },
-  "devDependencies": {
+    "webpack-hot-middleware": "2.21.0",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-loader": "7.1.2",
@@ -184,5 +217,8 @@
     "sinon": "4.2.2",
     "style-loader": "0.20.1",
     "url-loader": "0.6.2"
+  },
+  "devDependencies": {
+   
   }
 }
