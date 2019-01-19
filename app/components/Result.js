@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Result = (props) => {
-  const {scenario, successfulEmotion, updateScore} = props
+  const {scenario, successfulEmotion} = props
     return (
       <div>
         <h4>Result</h4>
@@ -11,7 +11,6 @@ const Result = (props) => {
           ?
           (
           <div>
-            {updateScore('correct')}
           </div>
           )
           :

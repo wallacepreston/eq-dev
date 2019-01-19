@@ -141,13 +141,13 @@ class Home extends React.PureComponent {
       scenariosIdx: 0,
       scenario: {},
       successfulEmotion: '',
-      score: {
-        correct: 0,
-        incorrect: 0
-      }
+      // score: {
+      //   correct: 0,
+      //   incorrect: 0
+      // }
     }
     this.nextScenario = this.nextScenario.bind(this)
-    this.updateScore = this.updateScore.bind(this)
+    // this.updateScore = this.updateScore.bind(this)
   }
 
   componentWillMount() {
@@ -312,29 +312,31 @@ class Home extends React.PureComponent {
     
     this.setState({
       scenariosIdx: newIdx,
-      scenario: newScenario
+      scenario: newScenario,
+      successfulEmotion: ''
     })
   }
 
-  updateScore(result){
-    const newSingleScore = this.state.score[result] + 1
-    if(result === 'correct'){
-      this.setState({
-        score:{
-          ...this.state.score,
-          correct: newSingleScore
-        }
-      })
-    }
-    else {
-      this.setState({
-        score:{
-          ...this.state.score,
-          incorrect: newSingleScore
-        }
-      })
-    }
-  }
+  // updateScore(result){
+  //   const newSingleScore = this.state.score[result] + 1
+  //   if(result === 'correct'){
+  //     this.setState({
+  //       score:{
+  //         ...this.state.score,
+  //         correct: newSingleScore
+  //       }
+  //     })
+  //   }
+  //   else {
+  //     this.setState({
+  //       score:{
+  //         ...this.state.score,
+  //         incorrect: newSingleScore
+  //       }
+  //     })
+  //   }
+  // }
+
 
   render() {
     return (
@@ -392,8 +394,7 @@ class Home extends React.PureComponent {
           ?
           (
             <div>
-              <Game currentEmotion={this.state.currentEmotion} scenario={this.state.scenario} successfulEmotion={this.state.successfulEmotion} nextScenario={this.nextScenario} updateScore={this.updateScore} score={this.state.score}/>
-              <p>Your Score: {this.state.score.correct}</p>
+              <Game currentEmotion={this.state.currentEmotion} scenario={this.state.scenario} successfulEmotion={this.state.successfulEmotion} nextScenario={this.nextScenario}/>
             </div>
           )
           :
