@@ -1,23 +1,27 @@
-## CLMTrackr + React + Webpack 3.x Quickstart
+# Dev-EQ
 
-This quickstart uses my React-Boilerplate with Webpack and the CLMtrackr library to perform facial recognition and detection. Be sure to check out the 
-`containers/Home/index.js` which contains an example of face tracking. 
+Detecting emotions through facial recognition, via a webcam.
 
-![screenshot](http://h4z.it/Image/7315dd_clmtrackss.PNG)
 
-## Requirements
-* NodeJS 8+
-* NPM 4+
+## Getting started
+
+Stack used:
+- Node.js
+- Express
+- PostgreSQL
+- Sequelize
+- React
+- clmtrackr (Special thanks to auduno for the project)
+
 
 ## Getting Started
 To quickly get started, fork this repo and clone it onto your local computer. Then run `npm install` to install all of the necessary libraries.
 ```
-git clone https://github.com/Technopathic/CLM-Quickstart.git
-cd clm-quickstart
+git clone
 npm install
 ```
 
-To run the server, simply do `npm run start` and your development website will be on http://localhost:3000.
+To run the server, simply do `npm run start-dev` and your development website will be on http://localhost:3000.
 To build for production: `npm run build`.
 
 ## Boilerplate Commands
