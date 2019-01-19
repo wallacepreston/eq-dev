@@ -82,7 +82,8 @@
       "sanitize.css",
       "pg",
       "pg-hstore",
-      "sequelize"
+      "sequelize",
+      "webpack"
     ],
     "include": [
       "core-js",
@@ -136,6 +137,8 @@
     "redux-thunk": "^2.3.0",
     "sequelize": "^4.42.0",
     "stats-js": "^1.0.0",
+    "webpack": "3.10.0",
+
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
@@ -176,7 +179,6 @@
     "sinon": "4.2.2",
     "style-loader": "0.20.1",
     "url-loader": "0.6.2",
-    "webpack": "3.10.0",
     "webpack-dev-middleware": "2.0.4",
     "webpack-hot-middleware": "2.21.0"
   }
