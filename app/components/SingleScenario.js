@@ -358,41 +358,46 @@ class Learn extends React.PureComponent {
                 <img className="emotion_icon" id="icon-happy" src="https://www.auduno.com/clmtrackr/examples/media/icon_happy.png"/>
               </div>
               <div id='emotion_chart'></div>
+              <button type="button" className="btn btn-primary btn-sm" value={this.state.startValue} disabled={this.state.startDisabled} onClick={this.startVideo} id="startbutton">Start</button>
+              <Link to={`/learn/scenarios/${Number(this.props.match.params.scenarioId) + 1}`}><button type="button" className="btn btn-primary btn-sm" onClick={this.nextScenario}>Next Scenario</button></Link>
+              
               {this.state.scenario
               ?
               (
                 <div>
-                  <h2>
+                  <h4>
                     {this.state.scenario.prompt}
-                  </h2>
+                  </h4>
                   <div>
                     {this.state.currentEmotion !== '' && this.state.scenario.correctEmotion !== this.state.successfulEmotion
                     ?
-                    <h2>You are currently showing me that you are <u>{this.state.currentEmotion}</u></h2>
+                    <div className="alert alert-primary" role="alert">
+                      <h4>You are currently showing me that you are <u>{this.state.currentEmotion}</u></h4>
+                    </div>
                     :
                     ''
                     }
                   </div>
 
                   <div id="Omri" width="400" height="300" preload="auto" loop playsInline autoPlay>
-                    {this.state.scenario.correctEmotion === this.state.successfulEmotion
+                    {!this.state.scenario.correctEmotion === this.state.successfulEmotion && this.state.currentEmotion !== '' 
                     ?
                     (
-                      ''
+                      <div>
+                        <p>What facial expression should you make in this case?</p> 
+                        <h4>
+                          Hit 'Start' when you're ready!
+                        </h4>
+                      </div>
                     )
                     :
                       (
-                      <h2>
-                        Try to guess what emotion you should express!
-                      </h2>
+                      ''
                       )
                     }
                   </div>
                   
-                  <button type="button" className="btn btn-primary btn-sm" value={this.state.startValue} disabled={this.state.startDisabled} onClick={this.startVideo} id="startbutton">Start</button>
-
-                  {/* <Game currentEmotion={this.state.currentEmotion} scenario={this.state.scenario} successfulEmotion={this.state.successfulEmotion} nextScenario={this.nextScenario}/> */}
-                  <Link to={`/learn/scenarios/${Number(this.props.match.params.scenarioId) + 1}`}><button type="button" className="btn btn-primary btn-sm" onClick={this.nextScenario}>Next Scenario</button></Link>
+                  
                 </div>
               )
               :
@@ -413,7 +418,9 @@ class Learn extends React.PureComponent {
                     autoPlay
                   />
                     <h4>Correct!</h4> 
-                    <h2>You should be <u>{this.state.successfulEmotion}</u> in this case!</h2>
+                    <div className="alert alert-primary" role="alert">
+                      <h4>You should be <u>{this.state.successfulEmotion}</u> in this case!</h4>
+                    </div>
                 </div>
               )
               :
