@@ -125,7 +125,8 @@
       "sinon",
       "style-loader",
       "url-loader",
-      "clmtrackr"
+      "clmtrackr",
+      "jsfeat"
     ],
     "include": [
       "core-js",

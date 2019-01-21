@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:scenarioId', async (req, res, next) => {
   try {
-    const response = await Scenario.findById(req.params.scenarioId);
+    const response = await Scenario.findByPk(req.params.scenarioId);
     res.send(response)
   }
   catch (error) {
