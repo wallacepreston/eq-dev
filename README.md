@@ -21,7 +21,7 @@ git clone
 npm install
 ```
 
-To run the server, simply do `npm run start-dev` and your development website will be on http://localhost:3000.
+To run the server, simply do `npm run start-dev` and your development website will be on localhost:3000.
 To build for production: `npm run build`.
 
 ## Boilerplate Commands
