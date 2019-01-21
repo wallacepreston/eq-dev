@@ -1,13 +1,6 @@
-/*
- *
- * App
- *
- */
-
-import React, {Component} from 'react';
+import React from 'react';
 import { Switch, Route, withRouter} from 'react-router-dom';
 
-import Learn from './Learn';
 import NotFound from './NotFound';
 
 import './style.css';

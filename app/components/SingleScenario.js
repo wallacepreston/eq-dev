@@ -3,7 +3,6 @@
 import 'babel-polyfill'
 import React from 'react';
 import Helmet from 'react-helmet';
-import { connect } from 'react-redux';
 import {withRouter, Switch, Route, Link} from 'react-router-dom';
 import axios from 'axios';
 
@@ -12,19 +11,14 @@ import clm from 'clmtrackr';
 import emotionClassifier from '../../internals/scripts/models/emotionclassifier';
 import emotionModel from '../../internals/scripts/models/emotionmodel.js';
 import pModel from '../../internals/scripts/models/pmodel.js';
-import {fetchScenarios, fetchScenario} from '../reducers'
 
-import Stats from 'stats-js';
 import * as d3 from "d3";
 
 import './style.css';
 import './styleM.css';
 
-import Game from './Game';
 import Finished from './Finished';
-import Prompt from './Prompt';
-import EmotionResponse from './EmotionResponse';
-import Result from './Result';
+
 
 // dummy data for the game
 // const dummyScenarios = [
@@ -108,19 +102,6 @@ attr("style", "font-size: 12").
 text(function(datum) { return datum.emotion;}).
 attr("transform", "translate(0, 18)").
 attr("class", "yAxis");
-
-
-/******** stats ********/
-
-const stats = new Stats();
-stats.domElement.style.position = 'absolute';
-stats.domElement.style.top = '0px';
-document.body.appendChild( stats.dom );
-
-// update stats on every iteration
-document.addEventListener('clmtrackrIteration', function(event) {
-stats.update();
-}, false);
 
 let er
 let emotion
