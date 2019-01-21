@@ -57,7 +57,6 @@ class Learn extends React.PureComponent {
     let vid = document.getElementById('videoel');
     let overlay = document.getElementById('overlay');
     let overlayCC = overlay.getContext('2d');
-    console.log('this.props.match.params.scenarioId: ', this.props.match.params.scenarioId)
     const {data} = await axios.get(`/api/scenarios/${this.props.match.params.scenarioId}`);
     this.setState({
       scenario: data,
