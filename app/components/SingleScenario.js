@@ -352,10 +352,10 @@ class Learn extends React.PureComponent {
             </div>
             <div id="emotion_container">
               <div id="emotion_icons">
-                <img className="emotion_icon" id="icon-angry" src="https://www.auduno.com/clmtrackr/examples/media/icon_angry.png" />
-                <img className="emotion_icon" id="icon-sad" src="https://www.auduno.com/clmtrackr/examples/media/icon_sad.png"/>
-                <img className="emotion_icon" id="icon-surprised" src="https://www.auduno.com/clmtrackr/examples/media/icon_surprised.png"/>
-                <img className="emotion_icon" id="icon-happy" src="https://www.auduno.com/clmtrackr/examples/media/icon_happy.png"/>
+                <img className="emotion_icon" id="icon-angry" src="/icon_angry.png" />
+                <img className="emotion_icon" id="icon-sad" src="/icon_sad.png"/>
+                <img className="emotion_icon" id="icon-surprised" src="/icon_surprised.png"/>
+                <img className="emotion_icon" id="icon-happy" src="/icon_happy.png"/>
               </div>
               <div id='emotion_chart'></div>
               <button type="button" className="btn btn-primary btn-sm" value={this.state.startValue} disabled={this.state.startDisabled} onClick={this.startVideo} id="startbutton">Start</button>
