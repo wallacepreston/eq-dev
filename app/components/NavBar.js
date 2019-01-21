@@ -9,7 +9,6 @@ export default class NavBar extends React.PureComponent { // eslint-disable-line
     return (
       <div>
         <nav className="navbar navbar-dark bg-primary navbar-expand-md ">
-          <div className="nav-item nav-link"><Link to="/">Home</Link></div>
           
           <Link to="/"><span id="nav-logo"><img src="/dev-eq-logo.png" width="40" /></span><div className="navbar-brand">Dev-EQ</div></Link>
           

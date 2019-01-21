@@ -176,7 +176,6 @@
     "coveralls": "2.12.0",
     "cross-env": "5.1.3",
     "css-loader": "0.28.9",
-    "d3": "^5.7.0",
     "enzyme": "3.3.0",
     "eventsource-polyfill": "0.9.6",
     "exports-loader": "0.7.0",

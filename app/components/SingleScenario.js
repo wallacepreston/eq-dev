@@ -3,105 +3,19 @@
 import 'babel-polyfill'
 import React from 'react';
 import Helmet from 'react-helmet';
-import {withRouter, Switch, Route, Link} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 import axios from 'axios';
-
 import clm from 'clmtrackr';
 
 import emotionClassifier from '../../internals/scripts/models/emotionclassifier';
 import emotionModel from '../../internals/scripts/models/emotionmodel.js';
-import pModel from '../../internals/scripts/models/pmodel.js';
-
-import * as d3 from "d3";
-
 import './style.css';
 import './styleM.css';
 
 import Finished from './Finished';
 
-
-// dummy data for the game
-// const dummyScenarios = [
-//   {
-//     prompt: 'Your coworker tells you her dog is sick.',
-//     correctEmotion: 'sad'
-//   },
-//   {
-//     prompt: 'Your boss says he is going to the mountains to ski next weekend. He shows you his brand-new powder skis',
-//     correctEmotion: 'surprised'
-//   },
-//   {
-//     prompt: 'Your coworker just got a promotion, even though you did not.',
-//     correctEmotion: 'happy'
-//   },
-//   {
-//     prompt: 'Your friend just got stung by a bee. She is crying.',
-//     correctEmotion: 'sad'
-//   }
-// ]
-// const gottenScenario = {
-//   prompt: 'Your coworker tells you her dog is sick.',
-//   correctEmotion: 'sad'
-// }
-
 var ec = new emotionClassifier();
 ec.init(emotionModel);
-var emotionData = ec.getBlank();
-
-/************ d3 code for barchart *****************/
-
-var margin = {top : 20, right : 20, bottom : 10, left : 40},
-width = 400 - margin.left - margin.right,
-height = 100 - margin.top - margin.bottom;
-
-var barWidth = 30;
-
-var formatPercent = d3.format(".0%");
-
-var x = d3.scaleLinear()
-.domain([0, ec.getEmotions().length]).range([margin.left, width+margin.left]);
-
-var y = d3.scaleLinear()
-.domain([0,1]).range([0, height]);
-
-var svg = d3.selectAll("#emotion_chart").append("svg")
-.attr("width", width + margin.left + margin.right)
-.attr("height", height + margin.top + margin.bottom)
-
-svg.selectAll("rect").
-data(emotionData).
-enter().
-append("svg:rect").
-attr("x", function(datum, index) { return x(index); }).
-attr("y", function(datum) { return height - y(datum.value); }).
-attr("height", function(datum) { return y(datum.value); }).
-attr("width", barWidth).
-attr("fill", "#2d578b");
-
-svg.selectAll("text.labels").
-data(emotionData).
-enter().
-append("svg:text").
-attr("x", function(datum, index) { return x(index) + barWidth; }).
-attr("y", function(datum) { return height - y(datum.value); }).
-attr("dx", -barWidth/2).
-attr("dy", "1.2em").
-attr("text-anchor", "middle").
-text(function(datum) { return datum.value;}).
-attr("fill", "white").
-attr("class", "labels");
-
-svg.selectAll("text.yAxis").
-data(emotionData).
-enter().append("svg:text").
-attr("x", function(datum, index) { return x(index) + barWidth; }).
-attr("y", height).
-attr("dx", -barWidth/2).
-attr("text-anchor", "middle").
-attr("style", "font-size: 12").
-text(function(datum) { return datum.emotion;}).
-attr("transform", "translate(0, 18)").
-attr("class", "yAxis");
 
 let er
 let emotion
@@ -245,7 +159,7 @@ class Learn extends React.PureComponent {
     let cp = this.ctrack.getCurrentParameters();
     er = ec.meanPredict(cp);
     if (er) {
-      this.updateData(er);
+      
       for (var i = 0;i < er.length;i++) {
         if (er[i].value > 0.4) {
           emotion = er[i].emotion
@@ -266,26 +180,6 @@ class Learn extends React.PureComponent {
     }
   }
 
-  updateData(data) {
-    // update
-    var rects = svg.selectAll("rect")
-      .data(data)
-      .attr("y", function(datum) { return height - y(datum.value); })
-      .attr("height", function(datum) { return y(datum.value); });
-    var texts = svg.selectAll("text.labels")
-      .data(data)
-      .attr("y", function(datum) { return height - y(datum.value); })
-      .text(function(datum) { return datum.value.toFixed(1);});
-
-    // enter
-    rects.enter().append("svg:rect");
-    texts.enter().append("svg:text");
-
-    // exit
-    rects.exit().remove();
-    texts.exit().remove();
-  }
-
   async nextScenario() {
     this.ctrack.stop();
     this.ctrack.reset();
@@ -297,26 +191,6 @@ class Learn extends React.PureComponent {
       successfulEmotion: ''
     })
   }
-
-  // updateScore(result){
-  //   const newSingleScore = this.state.score[result] + 1
-  //   if(result === 'correct'){
-  //     this.setState({
-  //       score:{
-  //         ...this.state.score,
-  //         correct: newSingleScore
-  //       }
-  //     })
-  //   }
-  //   else {
-  //     this.setState({
-  //       score:{
-  //         ...this.state.score,
-  //         incorrect: newSingleScore
-  //       }
-  //     })
-  //   }
-  // }
 
 
   render() {
