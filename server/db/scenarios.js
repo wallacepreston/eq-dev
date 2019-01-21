@@ -37,11 +37,11 @@ const Scenario = db.define('scenario', {
   },
   audioSuccessURL: {
     type: Sequelize.STRING,
-    defaultValue: 'http://feeds.soundcloud.com/stream/561263544-user-235075197-correct-great-job-1.mp3'
+    defaultValue: '/audio/correct-great-job.mp3'
   },
   audioFailureURL: {
     type: Sequelize.STRING,
-    defaultValue: 'http://feeds.soundcloud.com/stream/561267666-user-235075197-incorrect-oh-interesting.mp3'
+    defaultValue: '/audio/incorrect-oh-interesting.mp3'
   }
   
 })

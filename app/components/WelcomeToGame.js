@@ -5,7 +5,7 @@ const WelcomeToGame = (props) => {
     return (
       <div className="container">
         <audio
-          src="http://feeds.soundcloud.com/stream/561267645-user-235075197-today-were-going-to-learn.mp3" 
+          src="/audio/today-were-going-to-learn-about.mp3" 
           autoPlay
         />
 

@@ -7,14 +7,14 @@
   {
     "prompt": "Your boss says he is going to the mountains to ski next weekend. He shows you his brand-new powder skis",
     "correctEmotion": "surprised",
-    "audioSuccessURL": "http://feeds.soundcloud.com/stream/561267705-user-235075197-correct-that-is-what-i-was.mp3",
+    "audioSuccessURL": "/audio/correct-that-is-what-i-was-hoping-for-yes.mp3",
     "imageSuccessURL": "/omri/correct-smile.jpg"
     
   },
   {
     "prompt": "Your coworker just got a promotion, even though you did not.",
     "correctEmotion": "happy",
-    "audioSuccessURL": "http://feeds.soundcloud.com/stream/561267702-user-235075197-correct-yes.mp3",
+    "audioSuccessURL": "/audio/correct-yes.mp3",
     "imageSuccessURL": "/omri/hello-arms-out.jpg"
   },
   {
@@ -25,7 +25,7 @@
   {
     "prompt": "Your direct report asks you to add a new feature to the application.",
     "correctEmotion": "happy",
-    "audioSuccessURL": "http://feeds.soundcloud.com/stream/561267705-user-235075197-correct-that-is-what-i-was.mp3",
+    "audioSuccessURL": "/audio/correct-that-is-what-i-was-hoping-for-yes.mp3",
     "imageSuccessURL": "/omri/incorrect-confused.jpg"
   },
   {
@@ -36,6 +36,6 @@
   {
     "prompt": "Your friend tells you about her cat had a litter of kittens.",
     "correctEmotion": "surprised",
-    "audioSuccessURL": "http://feeds.soundcloud.com/stream/561267702-user-235075197-correct-yes.mp3"
+    "audioSuccessURL": "/audio/correct-yes.mp3"
   }
 ]
